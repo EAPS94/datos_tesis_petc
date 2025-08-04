@@ -1,0 +1,15 @@
+# Entorno virtual
+venv/
+
+# Archivos y carpetas locales
+__pycache__/
+*.pyc
+
+# Datos sensibles o pesados
+output/
+logs/
+notebooks/
+
+# Archivos temporales de sistemas
+.DS_Store
+Thumbs.db
