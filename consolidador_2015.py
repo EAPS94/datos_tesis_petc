@@ -46,8 +46,8 @@ for archivo_path in base_dir.glob("*.xlsx"):
             logger.error(f"❌ Error en '{archivo_path.name}' [{hoja}]: {e}")
 
 # Guardar consolidado
-Path("output").mkdir(exist_ok=True)
-output_path = Path("output/consolidado_2015.csv")
-df_total.to_csv(output_path, index=False, encoding="latin1")
+Path("./output").mkdir(exist_ok=True)
+output_path = Path("./output/consolidado_2015.csv")
+df_total.to_csv(output_path, index=False, encoding="utf-8-sig")
 
 logger.info(f"\n📁 Consolidado 2015 generado: {output_path} — Total registros: {len(df_total)}")
