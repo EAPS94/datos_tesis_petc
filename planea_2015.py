@@ -1,26 +1,16 @@
-import pandas as pd
 from pathlib import Path
+import pandas as pd
 
-from src.etl.columnas_2015 import columnas_estandar
-from utils.logging_config import configurar_logger
+from src.columnas_planea_2015 import columnas_estandar
+from src.schema_plenea import ENTIDADES
+from utils.logging_config import configurar_logger_planea
 
 # Inicializa el logger
-logger = configurar_logger("consolidador_2015", archivo_log="consolidador_archivos.log")
-
-# Diccionario de claves ENT a nombre de entidad
-ENTIDADES = {
-    1: "Aguascalientes", 2: "Baja California", 3: "Baja California Sur", 4: "Campeche",
-    5: "Coahuila", 6: "Colima", 7: "Chiapas", 8: "Chihuahua", 9: "Ciudad de México",
-    10: "Durango", 11: "Guanajuato", 12: "Guerrero", 13: "Hidalgo", 14: "Jalisco",
-    15: "Estado de México", 16: "Michoacán", 17: "Morelos", 18: "Nayarit", 19: "Nuevo León",
-    20: "Oaxaca", 21: "Puebla", 22: "Querétaro", 23: "Quintana Roo", 24: "San Luis Potosí",
-    25: "Sinaloa", 26: "Sonora", 27: "Tabasco", 28: "Tamaulipas", 29: "Tlaxcala",
-    30: "Veracruz", 31: "Yucatán", 32: "Zacatecas"
-}
+logger = configurar_logger_planea("consolidador_planea_2015", archivo_log="consolidador_planea.log")
 
 # Inicializa acumulador
 anio = 2015
-base_dir = Path("data/raw/2015")
+base_dir = Path("./data/raw/planea/2015")
 df_total = pd.DataFrame()
 
 logger.info("🚀 Iniciando consolidación de archivos 2015...")
@@ -46,8 +36,8 @@ for archivo_path in base_dir.glob("*.xlsx"):
             logger.error(f"❌ Error en '{archivo_path.name}' [{hoja}]: {e}")
 
 # Guardar consolidado
-Path("./output").mkdir(exist_ok=True)
-output_path = Path("./output/consolidado_2015.csv")
+Path("./output/planea").mkdir(exist_ok=True)
+output_path = Path("./output/planea/consolidado_2015.csv")
 df_total.to_csv(output_path, index=False, encoding="utf-8-sig")
 
 logger.info(f"\n📁 Consolidado 2015 generado: {output_path} — Total registros: {len(df_total)}")

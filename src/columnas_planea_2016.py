@@ -41,7 +41,7 @@ columnas_lenguaje = [
     "LENGUAJE_PCT_IV"
 ]
 
-#   6. Niveles de logro en matemáticas: I, II, III y IV
+#   5. Niveles de logro en matemáticas: I, II, III y IV
 #       - Porcentaje de alumnos en la escuela
 columnas_matematicas = [
     "MATEMATICAS_PCT_I",

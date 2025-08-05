@@ -8,7 +8,6 @@ __pycache__/
 # Datos sensibles o pesados
 output/
 logs/
-notebooks/
 
 # Archivos temporales de sistemas
 .DS_Store
