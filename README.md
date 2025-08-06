@@ -80,13 +80,41 @@ Cada script:
 
 ### Paso 2: Consolidar el archivo maestro
 
-Una vez generados los archivos de cada año, ejecuta:
+Una vez generados los archivos de cada año, ejecuta el script `planea_final.py` que consolida los archivos CSV de resultados PLANEA de los años 2015 a 2018 en un solo archivo: `output/planea/planea_total.csv`.
 
-```bash
+##### ⚙️ Uso básico
+
+```
 python planea_final.py
 ```
 
-Este script:
+Este comando generará el archivo consolidado utilizando el comportamiento por defecto del sistema operativo para el terminador de línea (`lineterminator`), lo cual funciona correctamente en macOS y Linux.
+
+##### Compatibilidad con Windows
+
+En algunos entornos Windows, es necesario forzar el uso del terminador de línea `\n` al guardar el archivo CSV, para evitar errores de codificación o incompatibilidades al abrir el archivo en Excel u otros programas.
+
+Para ello, puedes ejecutar el script con el argumento `--forzar-lf`:
+
+```
+python planea_final.py --forzar-lf
+```
+
+Este argumento activa la opción `lineterminator="\n"` al guardar el archivo consolidado.
+
+##### 🧪 Detalles técnicos
+
+El argumento `--forzar-lf` es opcional y su inclusión modifica dinámicamente el comportamiento del método `to_csv()`:
+
+```python
+if args.forzar_lf:
+    csv_kwargs["lineterminator"] = "\n"
+```
+
+Esto permite compatibilidad multiplataforma sin necesidad de editar manualmente el script según el sistema operativo.
+
+
+En resumen, este script:
 
 - Carga los archivos `consolidado_2015.csv` a `consolidado_2018.csv`.
 - Genera el archivo final `output/planea/planea_total.csv`.

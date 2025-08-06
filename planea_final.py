@@ -1,9 +1,15 @@
 import pandas as pd
 import re
 from pathlib import Path
+import argparse
 
 from src.schema_plenea import columnas_finales_planea
 from utils.logging_config import configurar_logger_planea
+
+# Argumentos desde línea de comandos
+parser = argparse.ArgumentParser(description="Consolidar archivos PLANEA")
+parser.add_argument("--forzar-lf", action="store_true", help="Usar lineterminator='\\n' para compatibilidad con Windows")
+args = parser.parse_args()
 
 # Logger
 logger = configurar_logger_planea("consolidar_final", archivo_log="final_planea.log")
@@ -20,7 +26,7 @@ df_consolidado = pd.DataFrame({col: pd.Series(dtype="object") for col in columna
 
 for anio, ruta in archivos.items():
     try:
-        df = pd.read_csv(ruta, encoding="utf-8-sig", low_memory= False)
+        df = pd.read_csv(ruta, encoding="utf-8-sig", low_memory=False)
 
         # Rellenar columnas faltantes
         columnas_faltantes = set(columnas_finales_planea) - set(df.columns)
@@ -43,7 +49,11 @@ for anio, ruta in archivos.items():
 Path("./output/planea").mkdir(exist_ok=True)
 salida = Path("./output/planea/planea_total.csv")
 
-with open(salida, "w", encoding="utf-8-sig") as f:
-    df_consolidado.to_csv(f, index=False, lineterminator="\n")
+# Seleccionar si se usa lineterminator o no
+csv_kwargs = {"index": False, "encoding": "utf-8-sig"}
+if args.forzar_lf:
+    csv_kwargs["lineterminator"] = "\n"
+
+df_consolidado.to_csv(salida, **csv_kwargs)
 
 logger.info(f"📁 Consolidado final guardado en: {salida} — Registros: {len(df_consolidado)}")
