@@ -2,8 +2,11 @@ import logging
 from params.paths import LOGS_DIR
 
 def configurar_logger_planea(nombre: str, archivo_log="workflow.log") -> logging.Logger:
-    LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    log_path = LOGS_DIR /"planea" / archivo_log
+    # Crear carpetas necesarias: logs y logs/planea
+    log_dir_planea = LOGS_DIR / "planea"
+    log_dir_planea.mkdir(parents=True, exist_ok=True)
+
+    log_path = log_dir_planea / archivo_log
 
     logger = logging.getLogger(nombre)
     logger.setLevel(logging.INFO)
@@ -23,8 +26,11 @@ def configurar_logger_planea(nombre: str, archivo_log="workflow.log") -> logging
     return logger
 
 def configurar_logger_excale(nombre: str, archivo_log="workflow.log") -> logging.Logger:
-    LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    log_path = LOGS_DIR /"excale" / archivo_log
+    # Crear carpetas necesarias: logs y logs/excale
+    log_dir_planea = LOGS_DIR / "excale"
+    log_dir_planea.mkdir(parents=True, exist_ok=True)
+
+    log_path = log_dir_planea / archivo_log
 
     logger = logging.getLogger(nombre)
     logger.setLevel(logging.INFO)

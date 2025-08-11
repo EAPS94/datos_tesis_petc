@@ -52,6 +52,46 @@ tesis_petc/
 ├── requirements.txt
 └── .gitignore
 ```
+---
+
+## ⚙️ Configuración del Entorno
+
+Antes de ejecutar el proyecto, se recomienda crear un entorno virtual para aislar las dependencias.
+
+### 🖥️ En macOS / Linux
+
+
+```
+# Crear entorno virtual
+python3 -m venv venv
+
+# Activar entorno virtual
+source venv/bin/activate
+
+# Instalar dependencias
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 🖼️ En Windows (PowerShell)
+
+```
+# Crear entorno virtual
+python -m venv venv
+
+# Activar entorno virtual
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+> Para desactivar el entorno virtual en cualquier sistema operativo:
+>
+> ```
+> deactivate
+> ```
 
 ---
 
@@ -82,7 +122,7 @@ Cada script:
 
 Una vez generados los archivos de cada año, ejecuta el script `planea_final.py` que consolida los archivos CSV de resultados PLANEA de los años 2015 a 2018 en un solo archivo: `output/planea/planea_total.csv`.
 
-##### ⚙️ Uso básico
+#### ⚙️ Uso básico
 
 ```
 python planea_final.py
@@ -90,7 +130,7 @@ python planea_final.py
 
 Este comando generará el archivo consolidado utilizando el comportamiento por defecto del sistema operativo para el terminador de línea (`lineterminator`), lo cual funciona correctamente en macOS y Linux.
 
-##### Compatibilidad con Windows
+#### Compatibilidad con Windows
 
 En algunos entornos Windows, es necesario forzar el uso del terminador de línea `\n` al guardar el archivo CSV, para evitar errores de codificación o incompatibilidades al abrir el archivo en Excel u otros programas.
 
@@ -102,7 +142,7 @@ python planea_final.py --forzar-lf
 
 Este argumento activa la opción `lineterminator="\n"` al guardar el archivo consolidado.
 
-##### 🧪 Detalles técnicos
+#### 🧪 Detalles técnicos
 
 El argumento `--forzar-lf` es opcional y su inclusión modifica dinámicamente el comportamiento del método `to_csv()`:
 

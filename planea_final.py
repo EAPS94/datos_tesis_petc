@@ -46,7 +46,7 @@ for anio, ruta in archivos.items():
         logger.error(f"❌ Error al procesar {ruta}: {e}")
 
 # Guardar archivo final
-Path("./output/planea").mkdir(exist_ok=True)
+Path("./output/planea").mkdir(parents=True, exist_ok=True)
 salida = Path("./output/planea/planea_total.csv")
 
 # Seleccionar si se usa lineterminator o no

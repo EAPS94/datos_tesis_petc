@@ -1,0 +1,169 @@
+cambios_limpieza_datos:
+  - fecha: 2025-08-09
+    descripcion: Registro de modificaciones, ajustes y limpiezas aplicadas a variables en el proceso de consolidación PLANEA (2015–2018).
+    detalles:
+      - variable: ENT
+        acciones:
+          - Se detectó el valor "_16" en el archivo `2018_PEB_Escuelas_16.xlsx` correspondiente a ENT 16 (MICHOACÁN).
+          - Se eliminaron caracteres especiales y se convirtió a tipo numérico.
+      - variable: ENTIDAD
+        acciones:
+          - Se limpiaron caracteres especiales y se estandarizó a mayúsculas.
+          - Se homologó "MEXICO" = "ESTADO DE MEXICO" (ENT = 15), consolidando como "MEXICO".
+      - variable: NOMBRE_ESCUELA
+        acciones:
+          - Se eliminaron espacios dobles, acentos y diacríticos.
+          - Se estandarizó a mayúsculas para asegurar comparabilidad entre registros.
+          - Se restringieron los caracteres permitidos a letras, números, espacios, punto (.) y guion (-).
+          - Se eliminaron caracteres especiales no permitidos para evitar problemas en procesos de análisis o comparaciones de texto.
+          - Se aseguró el tipo de dato `string` para consistencia en todo el dataset.
+      - variable: TURNO
+        acciones:
+          - Se estandarizaron valores a mayúsculas y sin acentos.
+          - Homologaciones aplicadas:
+              - COMPLETO → TIEMPO COMPLETO
+              - JORNADA AMPLIAD → JORNADA AMPLIADA
+              - AMPLIADO → JORNADA AMPLIADA
+              - CONTINUO → JORNADA AMPLIADA
+          - Caso puntual documentado:
+              - Registro con TURNO = "CONTINUO" y CLAVE_ESCUELA = "28PES0187V" (año 2017) homologado a "JORNADA AMPLIADA".
+          - Tipo final de la variable: string.
+      - variable: MUNICIPIO
+        acciones:
+          - Conversión a mayúsculas.
+          - Eliminación de acentos y diacríticos.
+          - Remoción de espacios dobles.
+          - Conservación únicamente de letras, números, espacios, puntos y guiones.
+          - Se estandarizó el tipo de dato a string.
+          - Esta limpieza asegura consistencia en nombres de municipios para comparaciones y análisis posteriores.
+      - variable: LOCALIDAD
+        acciones:
+          - Conversión a mayúsculas.
+          - Eliminación de acentos y diacríticos.
+          - Remoción de espacios dobles.
+          - Conservación únicamente de letras, números, espacios, puntos y guiones.
+          - Se estandarizó el tipo de dato a string.
+          - Esta limpieza asegura consistencia en nombres de localidades para comparaciones y análisis posteriores.
+      - variable: TIPO_ESCUELA
+        acciones:
+          - Conversión a mayúsculas.
+          - Eliminación de acentos y diacríticos.
+          - Remoción de espacios dobles.
+          - Conservación únicamente de letras, números, espacios, puntos y guiones.
+          - Se estandarizó el tipo de dato a string.
+          - Este tratamiento unifica el formato de los valores de tipo de escuela, facilitando análisis y comparaciones posteriores.
+      - variable: GRADO_EVALUADO
+        acciones:
+          - Conversión de todos los valores a mayúsculas.
+          - Eliminación de acentos y diacríticos.
+          - Homologación de denominaciones equivalentes:
+              - SEXTO ANO DE PRIMARIA y SEXTO GRADO DE PRIMARIA → SEXTO GRADO DE PRIMARIA.
+              - TERCER ANO DE SECUNDARIA y TERCER GRADO DE SECUNDARIA → TERCER GRADO DE SECUNDARIA.
+          - Conversión final del tipo de dato a string.
+          - Este proceso garantiza que la variable tenga únicamente categorías estandarizadas para análisis y comparación.
+      - variable: GRADO_MARGINACION
+        acciones:
+          - Se limpiaron caracteres especiales.
+          - Se homologaron categorías en: "'MUY ALTA Y ALTA', 'MEDIA', 'BAJA Y MUY BAJA', 'NO IDENTIFICADA'."
+      - variable: ALUMNOS_PROGRAMADOS
+        acciones:
+          - Se convirtió a tipo numérico.
+          - Se calcularon estadísticos como una referencia de valores válidos usando cuartiles (Q1–Q3) para detección de outliers.
+      - variable: ALUMNOS_EVALUADOS_LENGUAJE
+        acciones:
+          - Se convirtió a tipo numérico.
+          - Se calcularon estadísticos como una referencia de valores válidos usando cuartiles (Q1–Q3) para detección de outliers.
+cambio_tipo_variable:
+  - nombre: REPRESENTATIVIDAD_LENGUAJE
+    cambios:
+      - "Convertida a tipo string para homogenizar el formato de la variable."
+      - "Se preservaron los valores nulos como pd.NA."
+  - nombre: REPRESENTATIVIDAD_MATEMATICAS
+    cambios:
+      - "Convertida a tipo string para homogenizar el formato de la variable."
+      - "Se preservaron los valores nulos como pd.NA."
+  - nombre: CONFIABILIDAD_LENGUAJE
+    cambios:
+      - "Convertida a tipo string para homogenizar el formato de la variable."
+      - "Se preservaron los valores nulos como pd.NA."
+  - nombre: CONFIABILIDAD_MATEMATICAS
+    cambios:
+      - "Convertida a tipo string para homogenizar el formato de la variable."
+      - "Se preservaron los valores nulos como pd.NA."
+  - nombre: ESCUELAS_PARECIDAS
+    cambios:
+      - "Convertida a tipo string para homogenizar el formato de la variable."
+      - "Se preservaron los valores nulos como pd.NA."
+  - nombre: LENGUAJE_CANTIDAD_I
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_CANTIDAD_II
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_CANTIDAD_III
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_CANTIDAD_IV
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_PCT_I
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_PCT_II
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_PCT_III
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: LENGUAJE_PCT_IV
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+
+  - nombre: MATEMATICAS_CANTIDAD_I
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_CANTIDAD_II
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_CANTIDAD_III
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_CANTIDAD_IV
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_PCT_I
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_PCT_II
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_PCT_III
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+  - nombre: MATEMATICAS_PCT_IV
+    cambios:
+      - "Convertida a tipo numérico utilizando pd.to_numeric con errors='coerce'."
+      - "Valores no numéricos se transformaron a NaN para facilitar análisis posteriores."
+      - variable: ARCHIVO_ORIGEN
+        acciones:
+          - Se agregó como columna auxiliar para trazabilidad del archivo y hoja de origen.
+      - variable: ANIO_EVALUACION
+        acciones:
+          - Se agregó como columna auxiliar para identificar el año de aplicación de PLANEA.
+      - estructura_archivos:
+          - En el archivo `2015_PEB_Escuela_31.xlsx` (hoja "secundaria") se detectó una columna extra, eliminada manualmente para evitar desalineación.
